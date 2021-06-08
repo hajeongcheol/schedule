@@ -16,22 +16,27 @@ spec:
     spec:
       containers:
         - name: schedule
-          image: username/schedule:latest
+          image: hajeongcheol/schedule:latest
           ports:
             - containerPort: 8080
+          resources:
+            limits:
+              cpu: 500m
+            requests:
+              cpu: 500m
           readinessProbe:
             httpGet:
-              path: '/actuator/health'
+              path: '/schedules'
               port: 8080
-            initialDelaySeconds: 10
+            initialDelaySeconds: 20
             timeoutSeconds: 2
             periodSeconds: 5
             failureThreshold: 10
           livenessProbe:
             httpGet:
-              path: '/actuator/health'
+              path: '/schedules'
               port: 8080
-            initialDelaySeconds: 120
+            initialDelaySeconds: 180
             timeoutSeconds: 2
             periodSeconds: 5
             failureThreshold: 5
