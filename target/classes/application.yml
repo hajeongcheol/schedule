@@ -48,6 +48,16 @@ hystrix:
 ---
 spring:
   profiles: docker
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://mysql.mysql.svc.cluster.local:3306/scheduledb?useSSL=false&characterEncoding=UTF-8&serverTimezone=UTC
+    username: root
+    password: U9W3czSS7i
+  jpa:
+    database: mysql
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    generate-ddl: true
+    show-sql: true
   cloud:
     stream:
       kafka:
