@@ -39,16 +39,16 @@ public class CourseSchedule {
         System.out.println(
                 "\n\n##### CourseSchedule onPreUpdate : " + this.getPreOpenYn() + "/" + this.getOpenYn() + "\n\n");
 
-        if (this.getPreOpenYn().booleanValue() != this.getOpenYn().booleanValue()) {
+        //if (this.getPreOpenYn().booleanValue() != this.getOpenYn().booleanValue()) {
             Course course = new Course();
             // mappings goes here
             course.setOpenYn(this.getOpenYn());
 
-            if (!ScheduleApplication.applicationContext.getBean(CourseService.class).modifyOpenYn(course,
+            if (!ScheduleApplication.applicationContext.getBean(CourseService.class).course(course,
                     this.getCourseId().toString())) {
                 throw new RollbackException("Failed during Course Open");
             }
-        }
+        //}
     }
 
     @PostUpdate
