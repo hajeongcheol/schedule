@@ -59,27 +59,27 @@ phases:
           apiVersion: apps/v1
           kind: Deployment
           metadata:
-            name: course
+            name: schedule
             labels:
-              app: course
+              app: schedule
           spec:
             replicas: 1
             selector:
               matchLabels:
-                app: course
+                app: schedule
             template:
               metadata:
                 labels:
-                  app: course
+                  app: schedule
               spec:
                 containers:
-                  - name: course
+                  - name: schedule
                     image: $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$_PROJECT_NAME:$CODEBUILD_RESOLVED_SOURCE_VERSION
                     ports:
                       - containerPort: 8080
                     readinessProbe:
                       httpGet:
-                        path: '/courses'
+                        path: '/courseSchedules'
                         port: 8080
                       initialDelaySeconds: 10
                       timeoutSeconds: 2
@@ -87,7 +87,7 @@ phases:
                       failureThreshold: 10
                     livenessProbe:
                       httpGet:
-                        path: '/courses'
+                        path: '/courseSchedules'
                         port: 8080
                       initialDelaySeconds: 120
                       timeoutSeconds: 2
