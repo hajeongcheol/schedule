@@ -44,7 +44,7 @@ feign:
 hystrix:
   command:
     default:
-      execution.isolation.thread.timeoutInMilliseconds: 5000
+      execution.isolation.thread.timeoutInMilliseconds: 1000
 ---
 spring:
   profiles: docker
@@ -88,4 +88,4 @@ feign:
 hystrix:
   command:
     default:
-      execution.isolation.thread.timeoutInMilliseconds: 1000
+      execution.isolation.thread.timeoutInMilliseconds: 500
