@@ -44,15 +44,15 @@ phases:
           apiVersion: v1
           kind: Service
           metadata:
-            name: course
+            name: schedule
             labels:
-              app: course
+              app: schedule
           spec:
             ports:
               - port: 8080
                 targetPort: 8080
             selector:
-              app: course
+              app: schedule
           EOF
       - |
           cat  <<EOF | kubectl apply -f -
