@@ -20,7 +20,6 @@ phases:
       - echo $CODEBUILD_RESOLVED_SOURCE_VERSION
       - echo start command
       - $(aws ecr get-login --no-include-email --region $AWS_DEFAULT_REGION)
-#      - docker login --username AWS -p $(aws ecr get-login-password --region ap-northeast-2) 052937454741.dkr.ecr.ap-northeast-2.amazonaws.com/
   build:
     commands:
       - echo Build started on `date`
@@ -74,19 +73,24 @@ phases:
                     image: $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$_PROJECT_NAME:$CODEBUILD_RESOLVED_SOURCE_VERSION
                     ports:
                       - containerPort: 8080
+                    resources:
+                      limits:
+                        cpu: 500m
+                      requests:
+                        cpu: 500m
                     readinessProbe:
                       httpGet:
                         path: '/courseSchedules'
                         port: 8080
-                      initialDelaySeconds: 10
+                      initialDelaySeconds: 20
                       timeoutSeconds: 2
                       periodSeconds: 5
                       failureThreshold: 10
                     livenessProbe:
                       httpGet:
-                        path: '/courseSchedules'
+                        path: '/courseSchedules/1'
                         port: 8080
-                      initialDelaySeconds: 120
+                      initialDelaySeconds: 180
                       timeoutSeconds: 2
                       periodSeconds: 5
                       failureThreshold: 5
